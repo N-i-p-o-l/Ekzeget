@@ -1,10 +1,41 @@
 package ru.ekzeget.ekzeget.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by NArtur on 20.04.2016.
  */
-public class Book {
+public class Book implements Parcelable {
   String name;
+
+  protected Book(Parcel in) {
+    name = in.readString();
+    isNewTestament = in.readByte() != 0;
+    tableName = in.readString();
+    chapters = in.readInt();
+  }
+
+  @Override public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(name);
+    dest.writeByte((byte) (isNewTestament ? 1 : 0));
+    dest.writeString(tableName);
+    dest.writeInt(chapters);
+  }
+
+  @Override public int describeContents() {
+    return 0;
+  }
+
+  public static final Creator<Book> CREATOR = new Creator<Book>() {
+    @Override public Book createFromParcel(Parcel in) {
+      return new Book(in);
+    }
+
+    @Override public Book[] newArray(int size) {
+      return new Book[size];
+    }
+  };
 
   public String getName() {
     return name;
