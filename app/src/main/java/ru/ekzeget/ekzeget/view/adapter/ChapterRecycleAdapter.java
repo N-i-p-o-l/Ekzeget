@@ -1,22 +1,32 @@
 package ru.ekzeget.ekzeget.view.adapter;
 
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import java.util.List;
 import ru.ekzeget.ekzeget.R;
+import ru.ekzeget.ekzeget.model.Book;
+import ru.ekzeget.ekzeget.view.fragment.InterChooseFragment;
 
 /**
  * Created by NArtur on 25.04.2016.
  */
 public class ChapterRecycleAdapter extends RecyclerView.Adapter {
 
-  private List<String> poemList;
+  private final static String TAG = "ChapterRecycleAdapter";
 
-  public ChapterRecycleAdapter(List<String> poemList) {
+  private List<String> poemList;
+  private FragmentManager fm;
+  private Book book;
+
+  public ChapterRecycleAdapter(List<String> poemList, Book book, FragmentManager fm) {
     this.poemList = poemList;
+    this.book = book;
+    this.fm = fm;
   }
 
   @Override public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -27,12 +37,14 @@ public class ChapterRecycleAdapter extends RecyclerView.Adapter {
   }
 
   @Override public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-     String text = poemList.get(position);
+    String text = poemList.get(position);
     ChapterViewHolder chapterViewHolder = (ChapterViewHolder) holder;
     chapterViewHolder.chapterText.setText((position + 1) + " " + text);
-    holder.itemView.setOnClickListener((v -> {
-      //
-    }));
+    holder.itemView.setOnClickListener((v) -> {
+      InterChooseFragment interChooseFragment = InterChooseFragment.newInstance(new String[] {"1", "2"});
+      interChooseFragment.show(fm, "fragmentInters");
+      Log.d(TAG, "Clicked " + position);
+    });
   }
 
   @Override public int getItemCount() {

@@ -7,4 +7,5 @@
   <string name="hello_blank_fragment">Hello blank fragment</string>
   <string name="parts">Главы</string>
   <string name="chapter">Глава</string>
+  <string name="interpretation">Толкование</string>
 </resources>

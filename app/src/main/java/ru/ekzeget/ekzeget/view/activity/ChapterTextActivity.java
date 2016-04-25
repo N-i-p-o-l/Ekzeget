@@ -2,6 +2,7 @@ package ru.ekzeget.ekzeget.view.activity;
 
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import ru.ekzeget.ekzeget.database.DatabaseAccess;
 import ru.ekzeget.ekzeget.model.Book;
 import ru.ekzeget.ekzeget.view.adapter.ChapterRecycleAdapter;
 import ru.ekzeget.ekzeget.view.adapter.PartsRecycleAdapter;
+import ru.ekzeget.ekzeget.view.fragment.InterChooseFragment;
 
 /**
  * Created by NArtur on 25.04.2016.
@@ -53,9 +55,10 @@ public class ChapterTextActivity extends AppCompatActivity {
     databaseAccess.open();
 
     toolbarTextView.setText(getString(R.string.chapter) + " " + position);
+    FragmentManager fm = getSupportFragmentManager();
     recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     recyclerView.setAdapter(new ChapterRecycleAdapter
-        (databaseAccess.getPoemPartText(book.getTableName() + position)));
+        (databaseAccess.getPoemPartText(book.getTableName() + position), book, fm));
 
   }
 
