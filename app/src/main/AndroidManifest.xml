@@ -21,6 +21,8 @@
     </activity>
     <activity android:name=".view.activity.PartsActivity">
     </activity>
+    <activity android:name=".view.activity.ChapterTextActivity">
+    </activity>
   </application>
 
 </manifest>

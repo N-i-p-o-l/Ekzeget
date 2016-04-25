@@ -7,7 +7,11 @@ import android.os.Parcelable;
  * Created by NArtur on 20.04.2016.
  */
 public class Book implements Parcelable {
+
   String name;
+  boolean isNewTestament;
+  String tableName;
+  int chapters;
 
   protected Book(Parcel in) {
     name = in.readString();
@@ -68,10 +72,6 @@ public class Book implements Parcelable {
   public void setChapters(int chapters) {
     this.chapters = chapters;
   }
-
-  boolean isNewTestament;
-  String tableName;
-  int chapters;
 
   public Book(String name, String tableName, int chapters) {
     this.name = name;

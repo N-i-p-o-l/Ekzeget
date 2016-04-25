@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 import ru.ekzeget.ekzeget.R;
 import ru.ekzeget.ekzeget.model.Book;
+import ru.ekzeget.ekzeget.view.activity.ChapterTextActivity;
 import ru.ekzeget.ekzeget.view.activity.PartsActivity;
 
 /**
@@ -18,9 +19,11 @@ import ru.ekzeget.ekzeget.view.activity.PartsActivity;
 public class PartsRecycleAdapter  extends RecyclerView.Adapter {
 
   private String[] parts;
+  private Book book;
 
-  public PartsRecycleAdapter(String[] parts) {
+  public PartsRecycleAdapter(String[] parts, Book book) {
     this.parts = parts;
+    this.book = book;
   }
 
   @Override public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -35,6 +38,13 @@ public class PartsRecycleAdapter  extends RecyclerView.Adapter {
     PartsViewHolder partsViewHolder = (PartsViewHolder) holder;
     partsViewHolder.partNumber.setText(part);
     holder.itemView.setOnClickListener((v) -> {
+      //Открытие текста главы
+      Bundle bundle = new Bundle();
+      bundle.putParcelable("book", book);
+      bundle.putInt("pos", position + 1);
+      Intent intent = new Intent(v.getContext(), ChapterTextActivity.class);
+      intent.putExtras(bundle);
+      v.getContext().startActivity(intent);
     });
   }
 

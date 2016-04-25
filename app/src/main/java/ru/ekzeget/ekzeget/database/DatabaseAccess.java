@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseAccess {
+
+  private final static String COLUMN_ST_TEXT = "st_text";
+
   private SQLiteOpenHelper openHelper;
   private SQLiteDatabase database;
   private static DatabaseAccess instance;
@@ -49,17 +52,16 @@ public class DatabaseAccess {
     }
   }
 
-  public List<String> getTest() {
+  public List<String> getPoemPartText(String table) {
     List<String> list = new ArrayList<>();
-    Cursor cursor = database.rawQuery("SELECT st_text FROM stih_1car1", null);
+    Cursor cursor = database.rawQuery("SELECT " + COLUMN_ST_TEXT + " FROM stih_" + table, null);
     cursor.moveToFirst();
     while (!cursor.isAfterLast()) {
-      list.add(cursor.getString(0));
+      list.add(cursor.getString(cursor.getColumnIndex(COLUMN_ST_TEXT)));
       cursor.moveToNext();
     }
     cursor.close();
     return list;
   }
-
 
 }
