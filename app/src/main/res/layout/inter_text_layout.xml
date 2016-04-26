@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ru.ekzeget.ekzeget.view.activity.InterTextActivity"
+    >
+
+  <android.support.v7.widget.Toolbar
+      android:id="@+id/interToolbar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:minHeight="?attr/actionBarSize"
+      android:theme="@style/ToolbarTheme"
+      app:titleTextAppearance="@style/Toolbar.TitleText"
+      app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+    <TextView
+        android:id="@+id/inter_toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+        android:layout_gravity="center"/>
+
+  </android.support.v7.widget.Toolbar>
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginTop="20dp"
+    android:fillViewport="true">
+
+  <TextView
+      android:id="@+id/inter_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:scrollHorizontally="false"
+      android:scrollbars="vertical"
+      android:textSize="18sp" />
+
+</ScrollView>
+</LinearLayout>

@@ -1,5 +1,6 @@
 package ru.ekzeget.ekzeget.view.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.FragmentManager;
@@ -26,9 +27,9 @@ public class ChapterTextActivity extends AppCompatActivity {
   private TextView toolbarTextView;
 
   private DatabaseAccess databaseAccess;
+  private Context context;
 
   private Book book;
-  private int position;
 
   public ChapterTextActivity() {
 
@@ -50,16 +51,17 @@ public class ChapterTextActivity extends AppCompatActivity {
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     book = getIntent().getExtras().getParcelable("book");
-    position = getIntent().getIntExtra("pos", 0);
+    context = getApplicationContext();
+
     databaseAccess = DatabaseAccess.getInstance(this);
     databaseAccess.open();
 
-    toolbarTextView.setText(getString(R.string.chapter) + " " + position);
+    toolbarTextView.setText(getString(R.string.chapter) + " " + book.getCurrentChapter());
     FragmentManager fm = getSupportFragmentManager();
     recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     recyclerView.setAdapter(new ChapterRecycleAdapter
-        (databaseAccess.getPoemPartText(book.getTableName() + position), book, fm));
-
+        (databaseAccess.getPoemPartText(book.getTableName() + book.getCurrentChapter()),
+            book, fm, context));
   }
 
   @Override
@@ -75,6 +77,5 @@ public class ChapterTextActivity extends AppCompatActivity {
 
   @Override protected void onDestroy() {
     super.onDestroy();
-    databaseAccess.close();
   }
 }

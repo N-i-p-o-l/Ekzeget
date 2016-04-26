@@ -1,14 +1,15 @@
 package ru.ekzeget.ekzeget.view.adapter;
 
+import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import java.util.List;
 import ru.ekzeget.ekzeget.R;
+import ru.ekzeget.ekzeget.database.DatabaseAccess;
 import ru.ekzeget.ekzeget.model.Book;
 import ru.ekzeget.ekzeget.view.fragment.InterChooseFragment;
 
@@ -21,10 +22,12 @@ public class ChapterRecycleAdapter extends RecyclerView.Adapter {
 
   private List<String> poemList;
   private FragmentManager fm;
+  private Context context;
   private Book book;
 
-  public ChapterRecycleAdapter(List<String> poemList, Book book, FragmentManager fm) {
+  public ChapterRecycleAdapter(List<String> poemList, Book book, FragmentManager fm, Context context) {
     this.poemList = poemList;
+    this.context = context;
     this.book = book;
     this.fm = fm;
   }
@@ -41,9 +44,9 @@ public class ChapterRecycleAdapter extends RecyclerView.Adapter {
     ChapterViewHolder chapterViewHolder = (ChapterViewHolder) holder;
     chapterViewHolder.chapterText.setText((position + 1) + " " + text);
     holder.itemView.setOnClickListener((v) -> {
-      InterChooseFragment interChooseFragment = InterChooseFragment.newInstance(new String[] {"1", "2"});
+      InterChooseFragment interChooseFragment = InterChooseFragment
+          .newInstance(getIntersAuthors(position + 1), position + 1, book);
       interChooseFragment.show(fm, "fragmentInters");
-      Log.d(TAG, "Clicked " + position);
     });
   }
 
@@ -61,4 +64,12 @@ public class ChapterRecycleAdapter extends RecyclerView.Adapter {
       chapterText = (TextView) itemView.findViewById(R.id.chapterPoemText);
     }
   }
+
+  private String[] getIntersAuthors(int position) {
+    final DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
+    List<String> list = databaseAccess.getIntersAuthors(book.getTableName() + book.getCurrentChapter(),
+        String.valueOf(position));
+    return list.toArray(new String[list.size()]);
+  }
+
 }

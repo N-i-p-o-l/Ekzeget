@@ -13,11 +13,22 @@ public class Book implements Parcelable {
   String tableName;
   int chapters;
 
+  public int getCurrentChapter() {
+    return currentChapter;
+  }
+
+  public void setCurrentChapter(int currentChapter) {
+    this.currentChapter = currentChapter;
+  }
+
+  int currentChapter;
+
   protected Book(Parcel in) {
     name = in.readString();
     isNewTestament = in.readByte() != 0;
     tableName = in.readString();
     chapters = in.readInt();
+    currentChapter = in.readInt();
   }
 
   @Override public void writeToParcel(Parcel dest, int flags) {
@@ -25,6 +36,7 @@ public class Book implements Parcelable {
     dest.writeByte((byte) (isNewTestament ? 1 : 0));
     dest.writeString(tableName);
     dest.writeInt(chapters);
+    dest.writeInt(currentChapter);
   }
 
   @Override public int describeContents() {

@@ -40,8 +40,8 @@ public class PartsRecycleAdapter  extends RecyclerView.Adapter {
     holder.itemView.setOnClickListener((v) -> {
       //Открытие текста главы
       Bundle bundle = new Bundle();
+      book.setCurrentChapter(position + 1);
       bundle.putParcelable("book", book);
-      bundle.putInt("pos", position + 1);
       Intent intent = new Intent(v.getContext(), ChapterTextActivity.class);
       intent.putExtras(bundle);
       v.getContext().startActivity(intent);

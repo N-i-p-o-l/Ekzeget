@@ -7,10 +7,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import ru.ekzeget.ekzeget.model.Inter;
 
 public class DatabaseAccess {
 
   private final static String COLUMN_ST_TEXT = "st_text";
+  private final static String COLUMN_ST_NO = "st_no";
+  private final static String COLUMN_T_NAME = "t_name";
+  private final static String COLUMN_COMMENTS = "comments";
 
   private SQLiteOpenHelper openHelper;
   private SQLiteDatabase database;
@@ -58,6 +62,35 @@ public class DatabaseAccess {
     cursor.moveToFirst();
     while (!cursor.isAfterLast()) {
       list.add(cursor.getString(cursor.getColumnIndex(COLUMN_ST_TEXT)));
+      cursor.moveToNext();
+    }
+    cursor.close();
+    return list;
+  }
+
+  public List<String> getIntersAuthors(String table, String stNo) {
+    List<String> list = new ArrayList<>();
+    Cursor cursor = database.rawQuery("SELECT " + COLUMN_T_NAME + " FROM tolk_" + table
+        + " WHERE " + COLUMN_ST_NO + "=" + stNo, null);
+    cursor.moveToFirst();
+    while (!cursor.isAfterLast()) {
+      list.add(cursor.getString(cursor.getColumnIndex(COLUMN_T_NAME)));
+      cursor.moveToNext();
+    }
+    cursor.close();
+    return list;
+  }
+
+  public List<Inter> getIntersComments(String table, String stNo) {
+    List<Inter> list = new ArrayList<>();
+    Cursor cursor = database.rawQuery("SELECT " + COLUMN_T_NAME + ", " + COLUMN_COMMENTS + " FROM tolk_" + table
+        + " WHERE " + COLUMN_ST_NO + "=" + stNo, null);
+    cursor.moveToFirst();
+    while (!cursor.isAfterLast()) {
+      Inter inter = new Inter();
+      inter.setName(cursor.getString(cursor.getColumnIndex(COLUMN_T_NAME)));
+      inter.setComment(cursor.getString(cursor.getColumnIndex(COLUMN_COMMENTS)));
+      list.add(inter);
       cursor.moveToNext();
     }
     cursor.close();
