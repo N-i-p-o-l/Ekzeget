@@ -7,24 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import ru.ekzeget.ekzeget.R;
+import ru.ekzeget.ekzeget.database.Books;
+import ru.ekzeget.ekzeget.view.adapter.TestamentRecycleAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewTestamentFragment extends Fragment {
+public class NewTestamentFragment extends BaseTestamentFragment {
 
-  private final String TAG = "NewTestamentFragment";
-
-  public NewTestamentFragment() {
+  @Override protected void setRecycleAdapter() {
+    testamentRecycleAdapter = new TestamentRecycleAdapter(Books.getNewTestamentList());
   }
 
-  @Override public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-  }
-
-  @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    View rootview = inflater.inflate(R.layout.fragment_new_testament, container, false);
-    setRetainInstance(true);
-    return rootview;
-  }
 }

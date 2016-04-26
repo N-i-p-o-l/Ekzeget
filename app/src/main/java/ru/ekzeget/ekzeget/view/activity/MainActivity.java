@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import ru.ekzeget.ekzeget.R;
 import ru.ekzeget.ekzeget.view.adapter.MainViewPageAdapter;
 import ru.ekzeget.ekzeget.view.fragment.NewTestamentFragment;
+import ru.ekzeget.ekzeget.view.fragment.BaseTestamentFragment;
 import ru.ekzeget.ekzeget.view.fragment.OldTestamentFragment;
 
 /**
