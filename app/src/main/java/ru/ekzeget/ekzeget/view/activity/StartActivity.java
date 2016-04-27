@@ -24,15 +24,13 @@ public class StartActivity extends AppCompatActivity {
   private final static String DATABASE_READY = "databaseReady";
 
   private SharedPreferences preferences;
-  private ProgressBar progressBar;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_start);
 
-    progressBar = (ProgressBar) findViewById(R.id.databaseProgress);
-    progressBar.setVisibility(View.VISIBLE);
+    final ProgressBar progressBar = (ProgressBar) findViewById(R.id.databaseProgress);
 
     preferences  = PreferenceManager.getDefaultSharedPreferences(this);
 

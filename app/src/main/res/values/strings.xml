@@ -10,4 +10,6 @@
   <string name="interpretation">Толкование</string>
 
   <string name="error.database">Произошла ошибка при подготовки базы</string>
+  <string name="search_hint">Поиск</string>
+  <string name="search_title">Поиск по стихам</string>
 </resources>

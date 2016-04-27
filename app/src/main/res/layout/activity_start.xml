@@ -7,9 +7,10 @@
       android:id="@+id/databaseProgress"
       android:indeterminate="true"
       android:layout_centerInParent="true"
-      android:backgroundTint="@color/colorPrimaryDark"
+      android:indeterminateTint="@color/colorPrimaryDark"
       android:layout_width="64dip"
       android:layout_height="64dip"
+      android:visibility="visible"
       />
 
 </RelativeLayout>
