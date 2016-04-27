@@ -3,19 +3,24 @@ package ru.ekzeget.ekzeget.view.activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import ru.ekzeget.ekzeget.R;
+import ru.ekzeget.ekzeget.database.DatabaseAccess;
 
 public class SearchActivity extends AppCompatActivity {
 
   private RecyclerView recyclerView;
+
+  private DatabaseAccess databaseAccess;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +35,8 @@ public class SearchActivity extends AppCompatActivity {
     }
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+    databaseAccess = DatabaseAccess.getInstance(this);
+    databaseAccess.open();
     handleIntent(getIntent());
   }
 
@@ -42,7 +49,10 @@ public class SearchActivity extends AppCompatActivity {
 
     if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
       String query = intent.getStringExtra(SearchManager.QUERY);
-      //use the query to search
+      Runnable searchTask = () -> {
+        Log.d("Search", databaseAccess.runSearch(query).get(0).getSt_text());
+      };
+      searchTask.run();
     }
   }
 

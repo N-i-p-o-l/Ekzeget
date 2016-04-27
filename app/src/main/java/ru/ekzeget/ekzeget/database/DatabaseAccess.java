@@ -9,6 +9,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 import ru.ekzeget.ekzeget.model.Inter;
+import ru.ekzeget.ekzeget.model.SearchResult;
 
 public class DatabaseAccess {
 
@@ -21,6 +22,7 @@ public class DatabaseAccess {
 
   private final static String FTS_TABLE_NAME = "search";
   private final static String COLUMN_TABLE_NAME = "table_name";
+  private final static String SEARCH_LIMIT = "LIMIT 100";
 
   private SQLiteOpenHelper openHelper;
   private SQLiteDatabase database;
@@ -90,6 +92,25 @@ public class DatabaseAccess {
       database.endTransaction();
     }
 
+  }
+
+  public List<SearchResult> runSearch(String query) {
+    List<SearchResult> searchList = new ArrayList<>();
+    Cursor cursor = database.rawQuery("SELECT * FROM " + FTS_TABLE_NAME + " WHERE " + COLUMN_ST_TEXT
+    + " MATCH " + "'" + query + "' " + SEARCH_LIMIT, null);
+    cursor.moveToFirst();
+    while (!cursor.isAfterLast()) {
+      SearchResult searchResult = new SearchResult();
+      searchResult.setSt_no(cursor.getString(cursor.getColumnIndex(COLUMN_ST_NO)));
+      searchResult.setSt_text(cursor.getString(cursor.getColumnIndex(COLUMN_ST_TEXT)));
+      searchResult.setTableName(cursor.getString(cursor.getColumnIndex(COLUMN_TABLE_NAME)));
+      searchList.add(searchResult);
+
+      cursor.moveToNext();
+    }
+    cursor.close();
+
+    return searchList;
   }
 
   public List<String> getPoemPartText(String table) {
