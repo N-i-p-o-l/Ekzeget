@@ -5,16 +5,22 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 import ru.ekzeget.ekzeget.model.Inter;
 
 public class DatabaseAccess {
 
+  private final String TAG = "DatabaseAccess";
+
   private final static String COLUMN_ST_TEXT = "st_text";
   private final static String COLUMN_ST_NO = "st_no";
   private final static String COLUMN_T_NAME = "t_name";
   private final static String COLUMN_COMMENTS = "comments";
+
+  private final static String FTS_TABLE_NAME = "search";
+  private final static String COLUMN_TABLE_NAME = "table_name";
 
   private SQLiteOpenHelper openHelper;
   private SQLiteDatabase database;
@@ -54,6 +60,36 @@ public class DatabaseAccess {
     if (database != null) {
       this.database.close();
     }
+  }
+
+  public void createFtsSearch() {
+
+    database.execSQL("CREATE VIRTUAL TABLE " + FTS_TABLE_NAME + " using fts3" + "("
+    +COLUMN_ST_NO + "," + COLUMN_ST_TEXT + "," + COLUMN_TABLE_NAME + ");");
+
+    Cursor cursor = database
+        .rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name like '%stih%';", null);
+
+    database.beginTransaction();
+    try {
+      //
+      cursor.moveToFirst();
+      while (!cursor.isAfterLast()) {
+        database.execSQL("INSERT INTO " + FTS_TABLE_NAME + "(" + COLUMN_ST_NO + "," + COLUMN_ST_TEXT
+        + "," + COLUMN_TABLE_NAME + ") " + "SELECT " + COLUMN_ST_NO + "," + COLUMN_ST_TEXT + ","
+        + "'" + cursor.getString(0) + "' " + "FROM " + cursor.getString(0));
+
+        cursor.moveToNext();
+      }
+      cursor.close();
+
+      database.setTransactionSuccessful();
+    } catch(Exception e) {
+      Log.d(TAG, "Error feel FTS Table");
+    } finally {
+      database.endTransaction();
+    }
+
   }
 
   public List<String> getPoemPartText(String table) {

@@ -8,4 +8,6 @@
   <string name="parts">Главы</string>
   <string name="chapter">Глава</string>
   <string name="interpretation">Толкование</string>
+
+  <string name="error.database">Произошла ошибка при подготовки базы</string>
 </resources>
