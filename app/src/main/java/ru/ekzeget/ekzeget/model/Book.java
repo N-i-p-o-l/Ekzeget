@@ -13,6 +13,9 @@ public class Book implements Parcelable {
   String tableName;
   int chapters;
 
+  public Book() {
+  }
+
   public int getCurrentChapter() {
     return currentChapter;
   }

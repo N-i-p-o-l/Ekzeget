@@ -106,4 +106,29 @@ public class Books {
         .distinct().collect(Collectors.toList());
   }
 
+  public static Book getBookFromTableName(String tableName) {
+
+    String table = tableName.replace("stih_", "");
+    StringBuilder sb = new StringBuilder();
+    StringBuilder sb2 = new StringBuilder();
+    sb.append(tableName).reverse();
+
+    for (int i = 0; i < sb.length() - 1; i++) {
+      if (Character.isDigit(sb.charAt(i))) {
+        sb2.append(sb.charAt(i));
+      } else {
+        break;
+      }
+    }
+    sb2.reverse();
+
+    Book book = new Book();
+    book.setCurrentChapter(sb2.length() > 0 ? Integer.parseInt(sb2.toString()) : 0);
+    book.setTableName(table.substring(0, table.length() - sb2.length()));
+
+    //Stream.of(getAllBooks()).findFirst().filter(t -> t.getTableName().equals(book.getTableName()));
+
+    return book;
+  }
+
 }

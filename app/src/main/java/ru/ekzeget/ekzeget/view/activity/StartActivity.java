@@ -3,6 +3,7 @@ package ru.ekzeget.ekzeget.view.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -30,8 +31,6 @@ public class StartActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_start);
 
-    final ProgressBar progressBar = (ProgressBar) findViewById(R.id.databaseProgress);
-
     preferences  = PreferenceManager.getDefaultSharedPreferences(this);
 
     if (preferences.getBoolean(DATABASE_READY, false)) {
@@ -41,7 +40,7 @@ public class StartActivity extends AppCompatActivity {
     }
 
     Runnable databasePrepare = this::prepareDatabase;
-    databasePrepare.run();
+    new Thread(databasePrepare).start();
   }
 
   private void prepareDatabase() {

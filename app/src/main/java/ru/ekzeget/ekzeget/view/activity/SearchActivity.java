@@ -68,11 +68,9 @@ public class SearchActivity extends AppCompatActivity {
       Runnable searchTask = () -> {
         searchResultList = databaseAccess.runSearch(query);
         bookList = new ArrayList<>();
-        for (Book book : Books.getAllBooks()) {
           for (SearchResult searchResult : searchResultList) {
-
+            bookList.add(Books.getBookFromTableName(searchResult.getTableName()));
           }
-        }
       };
       searchTask.run();
 
