@@ -1,5 +1,7 @@
 package ru.ekzeget.ekzeget.database;
 
+import com.annimon.stream.Collectors;
+import com.annimon.stream.Stream;
 import java.util.ArrayList;
 import java.util.List;
 import ru.ekzeget.ekzeget.model.Book;
@@ -97,6 +99,11 @@ public class Books {
     oldTestamentsList.add(new Book("3 Ездры", "3ezd", 16));
 
     return oldTestamentsList;
+  }
+
+  public static List<Book> getAllBooks() {
+    return Stream.concat(Stream.of(getNewTestamentList()), Stream.of(getOldTestamentList()))
+        .distinct().collect(Collectors.toList());
   }
 
 }

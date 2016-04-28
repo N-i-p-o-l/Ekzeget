@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -13,14 +14,29 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import com.annimon.stream.Stream;
+import java.util.ArrayList;
+import java.util.List;
 import ru.ekzeget.ekzeget.R;
+import ru.ekzeget.ekzeget.database.Books;
 import ru.ekzeget.ekzeget.database.DatabaseAccess;
+import ru.ekzeget.ekzeget.model.Book;
+import ru.ekzeget.ekzeget.model.SearchResult;
+import ru.ekzeget.ekzeget.view.adapter.SearchResultAdapter;
+import ru.ekzeget.ekzeget.view.adapter.TestamentRecycleAdapter;
 
 public class SearchActivity extends AppCompatActivity {
 
-  private RecyclerView recyclerView;
+  private final static String TAG = "SearchActivity";
 
+  private RecyclerView recyclerView;
   private DatabaseAccess databaseAccess;
+  private List<SearchResult> searchResultList;
+  private List<Book> bookList;
+
+  public SearchActivity() {
+
+  }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +66,18 @@ public class SearchActivity extends AppCompatActivity {
     if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
       String query = intent.getStringExtra(SearchManager.QUERY);
       Runnable searchTask = () -> {
-        Log.d("Search", databaseAccess.runSearch(query).get(0).getSt_text());
+        searchResultList = databaseAccess.runSearch(query);
+        bookList = new ArrayList<>();
+        for (Book book : Books.getAllBooks()) {
+          for (SearchResult searchResult : searchResultList) {
+
+          }
+        }
       };
       searchTask.run();
+
+      recyclerView.setLayoutManager(new LinearLayoutManager(this));
+      recyclerView.setAdapter(new SearchResultAdapter(searchResultList, bookList));
     }
   }
 
