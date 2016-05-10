@@ -13,7 +13,13 @@
     <item name="android:windowBackground">@color/window_background</item>
   </style>
 
-  <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+  <!-- For Start Activity. -->
+  <style name="AppFullScreenTheme" parent="Theme.AppCompat.NoActionBar"/>
+  
+  <style name="ToolbarTheme" parent="BaseToolbarTheme">
+  </style>
+
+  <style name="BaseToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Light">
     <item name="android:background">@color/colorPrimary</item>
     <item name="android:textColorPrimary">@android:color/white</item>
     <item name="actionMenuTextColor">@android:color/white</item>

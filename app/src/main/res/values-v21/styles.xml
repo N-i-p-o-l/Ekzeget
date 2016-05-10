@@ -4,4 +4,12 @@
     <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     <item name="android:statusBarColor">@color/colorPrimary</item>
   </style>
+
+  <style name="ToolbarTheme" parent="BaseToolbarTheme">
+    <item name="android:navigationIcon">@drawable/back_button</item>
+  </style>
+
+  <!-- For Start Activity. -->
+  <style name="AppFullScreenTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
+
 </resources>
