@@ -1,6 +1,7 @@
 package ru.ekzeget.ekzeget.view.activity;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -45,6 +46,8 @@ public class InterTextActivity extends AppCompatActivity {
 
     getSupportActionBar().setDisplayShowTitleEnabled(false);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+    toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.back_button));
 
     databaseAccess = DatabaseAccess.getInstance(this);
     book = getIntent().getExtras().getParcelable("book");

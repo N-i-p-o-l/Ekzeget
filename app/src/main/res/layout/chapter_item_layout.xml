@@ -11,7 +11,7 @@
       android:layout_height="wrap_content"
       android:text="New Text"
       android:layout_margin="@dimen/listItemTextMargin"
-      android:textSize="@dimen/book_text_size"
+      android:textSize="@dimen/chapter_text_size"
       android:id="@+id/chapterPoemText"
       />
 

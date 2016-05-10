@@ -36,7 +36,7 @@ public class PartsRecycleAdapter  extends RecyclerView.Adapter {
   @Override public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
     String part = parts[position];
     PartsViewHolder partsViewHolder = (PartsViewHolder) holder;
-    partsViewHolder.partNumber.setText(part);
+    partsViewHolder.partNumber.setText("Глава " + part);
     holder.itemView.setOnClickListener((v) -> {
       //Открытие текста главы
       Bundle bundle = new Bundle();

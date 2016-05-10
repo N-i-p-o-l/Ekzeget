@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -49,6 +50,8 @@ public class ChapterTextActivity extends AppCompatActivity {
 
     getSupportActionBar().setDisplayShowTitleEnabled(false);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+    toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.back_button));
 
     book = getIntent().getExtras().getParcelable("book");
     context = getApplicationContext();

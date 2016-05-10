@@ -42,7 +42,7 @@ public class ChapterRecycleAdapter extends RecyclerView.Adapter {
   @Override public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
     String text = poemList.get(position);
     ChapterViewHolder chapterViewHolder = (ChapterViewHolder) holder;
-    chapterViewHolder.chapterText.setText((position + 1) + " " + text);
+    chapterViewHolder.chapterText.setText((position + 1) + ". " + text);
     holder.itemView.setOnClickListener((v) -> {
       InterChooseFragment interChooseFragment = InterChooseFragment
           .newInstance(getIntersAuthors(position + 1), position + 1, book);

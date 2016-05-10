@@ -4,6 +4,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.ContactsContract;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -50,6 +51,8 @@ public class SearchActivity extends AppCompatActivity {
       setSupportActionBar(toolbar);
     }
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+    toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.back_button));
 
     databaseAccess = DatabaseAccess.getInstance(this);
     databaseAccess.open();

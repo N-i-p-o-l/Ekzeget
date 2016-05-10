@@ -14,7 +14,7 @@
       android:layout_height="wrap_content"
       android:minHeight="?attr/actionBarSize"
       android:theme="@style/ToolbarTheme"
-      app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+      app:theme="@style/ToolbarTheme"/>
 
   <android.support.v7.widget.RecyclerView
       android:layout_width= "match_parent"

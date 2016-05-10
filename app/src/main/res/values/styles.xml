@@ -11,15 +11,10 @@
     <item name="colorAccent">@color/colorAccent</item>
     <item name="android:textColor">@color/colorBlack</item>
     <item name="android:windowBackground">@color/window_background</item>
+    <item name="android:typeface">monospace</item>
   </style>
 
-  <!-- For Start Activity. -->
-  <style name="AppFullScreenTheme" parent="Theme.AppCompat.NoActionBar"/>
-  
-  <style name="ToolbarTheme" parent="BaseToolbarTheme">
-  </style>
-
-  <style name="BaseToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Light">
+  <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Light">
     <item name="android:background">@color/colorPrimary</item>
     <item name="android:textColorPrimary">@android:color/white</item>
     <item name="actionMenuTextColor">@android:color/white</item>
