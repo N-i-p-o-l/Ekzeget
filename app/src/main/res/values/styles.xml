@@ -2,10 +2,8 @@
 
   <style name="AppTheme" parent="Base.Theme.AppTheme"/>
 
-  <!-- Base application theme. -->
   <style name="Base.Theme.AppTheme"
       parent="Theme.AppCompat.Light.NoActionBar">
-    <!-- Customize your theme here. -->
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
@@ -17,10 +15,10 @@
   <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Light">
     <item name="android:background">@color/colorPrimary</item>
     <item name="android:textColorPrimary">@android:color/white</item>
-    <item name="actionMenuTextColor">@android:color/white</item>
+    <item name="actionMenuTextColor">@android:color/white</item>3
+    <item name="colorControlNormal">@android:color/white</item>
   </style>
 
-  <!-- This configures the styles for the title within the Toolbar  -->
   <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
     <item name="android:textSize">@dimen/title_text_size</item>
   </style>

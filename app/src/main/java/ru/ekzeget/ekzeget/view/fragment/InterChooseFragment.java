@@ -1,11 +1,18 @@
 package ru.ekzeget.ekzeget.view.fragment;
 
 import android.app.Dialog;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 import ru.ekzeget.ekzeget.R;
 import ru.ekzeget.ekzeget.model.Book;
 import ru.ekzeget.ekzeget.view.activity.ChapterTextActivity;
@@ -48,7 +55,14 @@ public class InterChooseFragment extends AppCompatDialogFragment {
 
   @Override public Dialog onCreateDialog(Bundle savedInstanceState) {
     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-    builder.setTitle(R.string.interpretation)
+    TextView title = new TextView(getActivity());
+    title.setText(getString(R.string.interpretation));
+    title.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
+    title.setPadding(16, 16, 16, 16);
+    title.setGravity(Gravity.CENTER);
+    title.setTextColor(Color.WHITE);
+    title.setTextSize(18);
+    builder.setCustomTitle(title)
         .setItems(params, (dialog, which) -> {
           Bundle bundle = new Bundle();
           bundle.putParcelable("book", book);

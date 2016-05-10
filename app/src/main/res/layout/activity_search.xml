@@ -19,6 +19,8 @@
   <android.support.v7.widget.RecyclerView
       android:layout_width= "match_parent"
       android:background="@drawable/recycleview_background"
+      android:layout_marginLeft="@dimen/listItemMargin"
+      android:layout_marginRight="@dimen/listItemMargin"
       android:layout_height = "match_parent"
       android:id="@+id/searchRecyclerView"
       android:scrollbars="vertical"/>
