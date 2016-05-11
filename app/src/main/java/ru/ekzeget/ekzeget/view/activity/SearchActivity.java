@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
 import com.annimon.stream.Stream;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +36,9 @@ public class SearchActivity extends AppCompatActivity {
   private List<SearchResult> searchResultList;
   private List<Book> bookList;
 
-  public SearchActivity() {
+  private TextView searchTextQuery;
 
-  }
+  public SearchActivity() {}
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +46,13 @@ public class SearchActivity extends AppCompatActivity {
     setContentView(R.layout.activity_search);
 
     recyclerView = (RecyclerView) findViewById(R.id.searchRecyclerView);
+    searchTextQuery = (TextView) findViewById(R.id.search_text_query);
     Toolbar toolbar = (Toolbar) findViewById(R.id.searchToolbar);
 
     if (toolbar != null) {
       setSupportActionBar(toolbar);
     }
+    getSupportActionBar().setDisplayShowTitleEnabled(false);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.back_button));
@@ -68,6 +71,7 @@ public class SearchActivity extends AppCompatActivity {
 
     if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
       String query = intent.getStringExtra(SearchManager.QUERY);
+      searchTextQuery.setText(query);
       Runnable searchTask = () -> {
         searchResultList = databaseAccess.runSearch(query);
         bookList = new ArrayList<>();

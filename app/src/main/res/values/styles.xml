@@ -15,8 +15,9 @@
   <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Light">
     <item name="android:background">@color/colorPrimary</item>
     <item name="android:textColorPrimary">@android:color/white</item>
-    <item name="actionMenuTextColor">@android:color/white</item>3
+    <item name="actionMenuTextColor">@android:color/white</item>
     <item name="colorControlNormal">@android:color/white</item>
+    <item name="android:textColorHint">@android:color/white</item>
   </style>
 
   <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
