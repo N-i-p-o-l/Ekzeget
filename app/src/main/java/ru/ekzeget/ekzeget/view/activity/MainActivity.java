@@ -41,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
     tabLayout.setupWithViewPager(viewPager);
   }
 
+  @Override protected void onRestart() {
+    super.onRestart();
+    invalidateOptionsMenu();
+  }
+
   private void setupViewPager(ViewPager viewPager) {
     MainViewPageAdapter adapter = new MainViewPageAdapter(getSupportFragmentManager());
     adapter.addFragment(new OldTestamentFragment(), getString(R.string.OldTestament));
