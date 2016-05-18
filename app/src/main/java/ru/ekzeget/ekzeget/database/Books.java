@@ -15,6 +15,7 @@ public class Books {
   public static List<Book> newTestamentsList = new ArrayList<>(27);
 
   public static List<Book> getNewTestamentList() {
+    newTestamentsList.clear();
     newTestamentsList.add(new Book("От Матфея",   true,  "mf", 28));
     newTestamentsList.add(new Book("От Марка",    true,  "mk", 16));
     newTestamentsList.add(new Book("От Луки",     true,  "lk", 24));
@@ -47,6 +48,7 @@ public class Books {
   }
 
   public static List<Book> getOldTestamentList() {
+    oldTestamentsList.clear();
     oldTestamentsList.add(new Book("Бытие", "byt", 50));
     oldTestamentsList.add(new Book("Исход", "ish", 40));
     oldTestamentsList.add(new Book("Левит", "lev", 27));
