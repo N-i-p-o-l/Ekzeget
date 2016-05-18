@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.ViewSwitcher;
 import com.annimon.stream.Stream;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,7 @@ public class SearchActivity extends AppCompatActivity {
   private List<Book> bookList;
 
   private TextView searchTextQuery;
+  private ViewSwitcher viewSwitcher;
 
   public SearchActivity() {}
 
@@ -47,11 +49,13 @@ public class SearchActivity extends AppCompatActivity {
 
     recyclerView = (RecyclerView) findViewById(R.id.searchRecyclerView);
     searchTextQuery = (TextView) findViewById(R.id.search_text_query);
-    Toolbar toolbar = (Toolbar) findViewById(R.id.searchToolbar);
+    viewSwitcher = (ViewSwitcher) findViewById(R.id.viewSwitcher);
 
+    Toolbar toolbar = (Toolbar) findViewById(R.id.searchToolbar);
     if (toolbar != null) {
       setSupportActionBar(toolbar);
     }
+
     getSupportActionBar().setDisplayShowTitleEnabled(false);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -82,7 +86,13 @@ public class SearchActivity extends AppCompatActivity {
       searchTask.run();
 
       recyclerView.setLayoutManager(new LinearLayoutManager(this));
-      recyclerView.setAdapter(new SearchResultAdapter(searchResultList, bookList));
+
+      if (searchResultList.isEmpty()) {
+        viewSwitcher.setDisplayedChild(1);
+      } else {
+        viewSwitcher.setDisplayedChild(0);
+        recyclerView.setAdapter(new SearchResultAdapter(searchResultList, bookList));
+      }
     }
   }
 

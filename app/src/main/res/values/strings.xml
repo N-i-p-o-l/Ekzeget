@@ -12,4 +12,5 @@
   <string name="error.database">Произошла ошибка при подготовки базы</string>
   <string name="search_hint">Поиск</string>
   <string name="search_title">Поиск по стихам</string>
+  <string name="no_search_results">По Вашему запросу ничего не найдено</string>
 </resources>
