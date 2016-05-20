@@ -25,6 +25,11 @@ android {
       moduleName "libandroid_sqlite"
     }
 
+    sourceSets.main {
+      jni.srcDirs = []
+      jniLibs.srcDir "src/main/libs"
+    }
+
   }
   buildTypes {
     release {
