@@ -8,7 +8,7 @@ void throw_sqlite3_exception(JNIEnv* env, sqlite3* handle, int errcode) {
 
 	const char* errmsg = sqlite3_errmsg(handle);
 
-	jclass exClass = (*env)->FindClass(env, "biz/sneg/sqlite/SQLiteException");
+	jclass exClass = (*env)->FindClass(env, "ru/ekzeget/ekzeget/database/sqlite/SQLiteException");
 
 	(*env)->ThrowNew(env, exClass, errmsg);
 }

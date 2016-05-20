@@ -4,7 +4,7 @@
 
 #include "android_sqlite.h"
 
-int Java_biz_sneg_sqlite_SQLiteCursor_step(JNIEnv* env, jobject object, int statementHandle) {
+int Java_ru_ekzeget_ekzeget_database_sqlite_SQLiteCursor_step(JNIEnv* env, jobject object, int statementHandle) {
 	sqlite3_stmt* handle = (sqlite3_stmt*)statementHandle;
 
 	int errcode = 0 ;
@@ -25,13 +25,13 @@ int Java_biz_sneg_sqlite_SQLiteCursor_step(JNIEnv* env, jobject object, int stat
 
 	throw_sqlite3_exception(env, sqlite3_db_handle(handle), errcode);
 }
-int Java_biz_sneg_sqlite_SQLiteCursor_columnType(JNIEnv* env, jobject object, int statementHandle, int columnIndex) {
+int Java_ru_ekzeget_ekzeget_database_sqlite_SQLiteCursor_columnType(JNIEnv* env, jobject object, int statementHandle, int columnIndex) {
 	sqlite3_stmt* handle = (sqlite3_stmt*)statementHandle;
 
 	return sqlite3_column_type(handle, columnIndex);
 }
 
-int Java_biz_sneg_sqlite_SQLiteCursor_columnIsNull(JNIEnv* env, jobject object, int statementHandle, int columnIndex) {
+int Java_ru_ekzeget_ekzeget_database_sqlite_SQLiteCursor_columnIsNull(JNIEnv* env, jobject object, int statementHandle, int columnIndex) {
 	sqlite3_stmt* handle = (sqlite3_stmt*)statementHandle;
 
 	int valType = sqlite3_column_type(handle, columnIndex);
@@ -39,7 +39,7 @@ int Java_biz_sneg_sqlite_SQLiteCursor_columnIsNull(JNIEnv* env, jobject object, 
 	return SQLITE_NULL == valType;
 }
 
-int Java_biz_sneg_sqlite_SQLiteCursor_columnIntValue(JNIEnv* env, jobject object, int statementHandle, int columnIndex) {
+int Java_ru_ekzeget_ekzeget_database_sqlite_SQLiteCursor_columnIntValue(JNIEnv* env, jobject object, int statementHandle, int columnIndex) {
 	sqlite3_stmt* handle = (sqlite3_stmt*)statementHandle;
 
 	int valType = sqlite3_column_type(handle, columnIndex);
@@ -50,13 +50,13 @@ int Java_biz_sneg_sqlite_SQLiteCursor_columnIntValue(JNIEnv* env, jobject object
 	return sqlite3_column_int(handle, columnIndex);
 }
 
-int Java_biz_sneg_sqlite_SQLiteCursor_columnCount(JNIEnv* env, jobject object, int statementHandle) {
+int Java_ru_ekzeget_ekzeget_database_sqlite_SQLiteCursor_columnCount(JNIEnv* env, jobject object, int statementHandle) {
 	sqlite3_stmt* handle = (sqlite3_stmt*)statementHandle;
 	
 	return sqlite3_column_count(handle);
 }
 
-jdouble Java_biz_sneg_sqlite_SQLiteCursor_columnDoubleValue(JNIEnv* env, jobject object, int statementHandle, int columnIndex) {
+jdouble Java_ru_ekzeget_ekzeget_database_sqlite_SQLiteCursor_columnDoubleValue(JNIEnv* env, jobject object, int statementHandle, int columnIndex) {
 	sqlite3_stmt* handle = (sqlite3_stmt*)statementHandle;
 
 	int valType = sqlite3_column_type(handle, columnIndex);
@@ -67,7 +67,7 @@ jdouble Java_biz_sneg_sqlite_SQLiteCursor_columnDoubleValue(JNIEnv* env, jobject
 	return sqlite3_column_double(handle, columnIndex);
 }
 
-jstring Java_biz_sneg_sqlite_SQLiteCursor_columnStringValue(JNIEnv* env, jobject object, int statementHandle, int columnIndex) {
+jstring Java_ru_ekzeget_ekzeget_database_sqlite_SQLiteCursor_columnStringValue(JNIEnv* env, jobject object, int statementHandle, int columnIndex) {
 	sqlite3_stmt* handle = (sqlite3_stmt*)statementHandle;
 
 	const char* str = sqlite3_column_text(handle, columnIndex);
@@ -82,7 +82,7 @@ jstring Java_biz_sneg_sqlite_SQLiteCursor_columnStringValue(JNIEnv* env, jobject
 	return 0;
 }
 
-jobject Java_biz_sneg_sqlite_SQLiteCursor_columnByteBufferValue(JNIEnv* env, jobject object, int statementHandle, int columnIndex) {
+jobject Java_ru_ekzeget_ekzeget_database_sqlite_SQLiteCursor_columnByteBufferValue(JNIEnv* env, jobject object, int statementHandle, int columnIndex) {
 	sqlite3_stmt* handle = (sqlite3_stmt*)statementHandle;
 
 	void *buf = (void*)sqlite3_column_blob(handle, columnIndex);
@@ -95,7 +95,7 @@ jobject Java_biz_sneg_sqlite_SQLiteCursor_columnByteBufferValue(JNIEnv* env, job
 	return 0;
 }
 
-jstring Java_biz_sneg_sqlite_SQLiteCursor_columnName(JNIEnv* env, jobject object, int statementHandle, int columnIndex) {
+jstring Java_ru_ekzeget_ekzeget_database_sqlite_SQLiteCursor_columnName(JNIEnv* env, jobject object, int statementHandle, int columnIndex) {
 	sqlite3_stmt* handle = (sqlite3_stmt*)statementHandle;
 	
 	const char* str = sqlite3_column_name(handle, columnIndex);
@@ -109,10 +109,4 @@ jstring Java_biz_sneg_sqlite_SQLiteCursor_columnName(JNIEnv* env, jobject object
 	
 	return 0;
 }
-/*
-	native int columnIntValue(int statementHandle, int columnIndex);
-	native String columnStringValue(int statementHandle, int columnIndex);
-	native double columnDoubleValue(int statementHandle, int columnIndex);
-	native ByteBuffer columnByteBufferValue(int statementHandle, int columnIndex);
-	native int step(int statementHandle);
-*/
+

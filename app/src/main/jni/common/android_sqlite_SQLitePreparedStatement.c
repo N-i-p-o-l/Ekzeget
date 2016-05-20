@@ -12,14 +12,14 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
 		return -1;
 	}
 
-	jclass class  = (*env)->FindClass(env, "biz/sneg/sqlite/SQLitePreparedStatement");
+	jclass class  = (*env)->FindClass(env, "ru/ekzeget/ekzeget/database/sqlite/SQLitePreparedStatement");
 
 	queryArgsCountField = (*env)->GetFieldID(env, class, "queryArgsCount", "I");
 
 	return JNI_VERSION_1_4;
 }
 
-int Java_biz_sneg_sqlite_SQLitePreparedStatement_prepare(JNIEnv* env, jobject object, int sqliteHandle, jstring sql) {
+int Java_ru_ekzeget_ekzeget_database_sqlite_SQLitePreparedStatement_prepare(JNIEnv* env, jobject object, int sqliteHandle, jstring sql) {
 	sqlite3* handle = (sqlite3*) sqliteHandle;
 
     char const * sqlStr = (*env)->GetStringUTFChars(env, sql, 0);
@@ -44,7 +44,7 @@ int Java_biz_sneg_sqlite_SQLitePreparedStatement_prepare(JNIEnv* env, jobject ob
     return (int)stmt_handle;
 }
 
-jobjectArray Java_biz_sneg_sqlite_SQLitePreparedStatement_reset(JNIEnv* env, jobject object, int statementHandle) {
+jobjectArray Java_ru_ekzeget_ekzeget_database_sqlite_SQLitePreparedStatement_reset(JNIEnv* env, jobject object, int statementHandle) {
 	sqlite3_stmt* handle = (sqlite3_stmt*)statementHandle;
 
 	int errcode = sqlite3_reset (handle);
@@ -70,7 +70,7 @@ jobjectArray Java_biz_sneg_sqlite_SQLitePreparedStatement_reset(JNIEnv* env, job
     return strArray;
 }
 
-void Java_biz_sneg_sqlite_SQLitePreparedStatement_finalize(JNIEnv* env, jobject object, int statementHandle) {
+void Java_ru_ekzeget_ekzeget_database_sqlite_SQLitePreparedStatement_finalize(JNIEnv* env, jobject object, int statementHandle) {
 	sqlite3_stmt* handle = (sqlite3_stmt*)statementHandle;
 
 	int errcode = sqlite3_finalize (handle);
@@ -79,7 +79,7 @@ void Java_biz_sneg_sqlite_SQLitePreparedStatement_finalize(JNIEnv* env, jobject 
     }
 }
 
-void Java_biz_sneg_sqlite_SQLitePreparedStatement_bindByteBuffer(JNIEnv* env, jobject object, int statementHandle, int index, jobject value) {
+void Java_ru_ekzeget_ekzeget_database_sqlite_SQLitePreparedStatement_bindByteBuffer(JNIEnv* env, jobject object, int statementHandle, int index, jobject value) {
 	sqlite3_stmt* handle = (sqlite3_stmt*)statementHandle;
 
 	const void* buf = (*env)->GetDirectBufferAddress(env, value);
@@ -91,7 +91,7 @@ void Java_biz_sneg_sqlite_SQLitePreparedStatement_bindByteBuffer(JNIEnv* env, jo
     }
 }
 
-void Java_biz_sneg_sqlite_SQLitePreparedStatement_bindString(JNIEnv* env, jobject object, int statementHandle, int index, jstring value) {
+void Java_ru_ekzeget_ekzeget_database_sqlite_SQLitePreparedStatement_bindString(JNIEnv* env, jobject object, int statementHandle, int index, jstring value) {
 	sqlite3_stmt* handle = (sqlite3_stmt*)statementHandle;
 
 	char const * valueStr = (*env)->GetStringUTFChars(env, value, 0);
@@ -104,7 +104,7 @@ void Java_biz_sneg_sqlite_SQLitePreparedStatement_bindString(JNIEnv* env, jobjec
 	if (valueStr != 0) (*env)->ReleaseStringUTFChars(env, value, valueStr);
 }
 
-void Java_biz_sneg_sqlite_SQLitePreparedStatement_bindInt(JNIEnv* env, jobject object, int statementHandle, int index, int value) {
+void Java_ru_ekzeget_ekzeget_database_sqlite_SQLitePreparedStatement_bindInt(JNIEnv* env, jobject object, int statementHandle, int index, int value) {
 	sqlite3_stmt* handle = (sqlite3_stmt*)statementHandle;
 
 	int errcode = sqlite3_bind_int(handle, index, value);
@@ -113,7 +113,7 @@ void Java_biz_sneg_sqlite_SQLitePreparedStatement_bindInt(JNIEnv* env, jobject o
     }
 }
 
-void Java_biz_sneg_sqlite_SQLitePreparedStatement_bindDouble(JNIEnv* env, jobject object, int statementHandle, int index, double value) {
+void Java_ru_ekzeget_ekzeget_database_sqlite_SQLitePreparedStatement_bindDouble(JNIEnv* env, jobject object, int statementHandle, int index, double value) {
 	sqlite3_stmt* handle = (sqlite3_stmt*)statementHandle;
 
 	int errcode = sqlite3_bind_double(handle, index, value);
@@ -122,7 +122,7 @@ void Java_biz_sneg_sqlite_SQLitePreparedStatement_bindDouble(JNIEnv* env, jobjec
     }
 }
 
-void Java_biz_sneg_sqlite_SQLitePreparedStatement_bindNull(JNIEnv* env, jobject object, int statementHandle, int index) {
+void Java_ru_ekzeget_ekzeget_database_sqlite_SQLitePreparedStatement_bindNull(JNIEnv* env, jobject object, int statementHandle, int index) {
 	sqlite3_stmt* handle = (sqlite3_stmt*)statementHandle;
 
 	int errcode = sqlite3_bind_null(handle, index);

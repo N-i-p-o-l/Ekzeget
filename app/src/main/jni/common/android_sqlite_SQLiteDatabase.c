@@ -1,7 +1,7 @@
 #include <jni.h>
-
 #include "sqlite3.h"
 #include <math.h>
+#include <stddef.h>
 #include "android_sqlite.h"
 
 #define DEG2RAD(degrees) (degrees * 0.01745327)
@@ -25,7 +25,7 @@ static void distanceFunc(sqlite3_context *context, int argc, sqlite3_value **arg
 	sqlite3_result_double(context, acos(sin(itemLatRad) * sin(userLatRad) + cos(itemLatRad) * cos(userLatRad) * cos(DEG2RAD(itemLong) - DEG2RAD(userLong))) * 6378.1);
 }
 
-void Java_biz_sneg_sqlite_SQLiteDatabase_closedb(JNIEnv* env, jobject object, int sqliteHandle) {
+void Java_ru_ekzeget_ekzeget_database_sqlite_SQLiteDatabase_closedb(JNIEnv* env, jobject object, int sqliteHandle) {
 	sqlite3* handle = (sqlite3*) sqliteHandle;
 
 	int err = sqlite3_close(handle);
@@ -35,7 +35,7 @@ void Java_biz_sneg_sqlite_SQLiteDatabase_closedb(JNIEnv* env, jobject object, in
 	}
 }
 
-int Java_biz_sneg_sqlite_SQLiteDatabase_opendb(JNIEnv* env, jobject object, jstring fileName) {
+int Java_ru_ekzeget_ekzeget_database_sqlite_SQLiteDatabase_opendb(JNIEnv* env, jobject object, jstring fileName) {
     char const * fileNameStr = (*env)->GetStringUTFChars(env, fileName, 0);
 
     sqlite3 * handle = 0;
