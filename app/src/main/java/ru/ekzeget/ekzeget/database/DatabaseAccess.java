@@ -66,7 +66,9 @@ public class DatabaseAccess {
 
   public void createFtsSearch() {
 
-    database.execSQL("CREATE VIRTUAL TABLE " + FTS_TABLE_NAME + " using fts3" + "("
+    //CREATE VIRTUAL TABLE txt2 USING fts4(tokenize=unicode61 "remove_diacritics=1");
+
+    database.execSQL("CREATE VIRTUAL TABLE " + FTS_TABLE_NAME + " using fts4" + "("
     +COLUMN_ST_NO + "," + COLUMN_ST_TEXT + "," + COLUMN_TABLE_NAME + ");");
 
     Cursor cursor = database
