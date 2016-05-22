@@ -1,7 +1,6 @@
 package ru.ekzeget.ekzeget.database;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 
 /**
  * Created by NArtur on 22.04.2016.

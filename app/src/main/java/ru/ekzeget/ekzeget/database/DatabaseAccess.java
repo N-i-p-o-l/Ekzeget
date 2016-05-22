@@ -1,13 +1,13 @@
 package ru.ekzeget.ekzeget.database;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
+import ru.ekzeget.ekzeget.database.sqlite.SQLiteCursor;
+import ru.ekzeget.ekzeget.database.sqlite.SQLiteDatabase;
+import ru.ekzeget.ekzeget.database.sqlite.SQLiteOpenHelper;
 import ru.ekzeget.ekzeget.model.Inter;
 import ru.ekzeget.ekzeget.model.SearchResult;
 
@@ -41,7 +41,7 @@ public class DatabaseAccess {
    * @param context the Context
    * @return the instance of DabaseAccess
    */
-  public static DatabaseAccess getInstance(Context context) {
+  public synchronized static DatabaseAccess getInstance(Context context) {
     if (instance == null) {
       instance = new DatabaseAccess(context);
     }
@@ -66,10 +66,10 @@ public class DatabaseAccess {
 
   public void createFtsSearch() {
 
-    database.execSQL("CREATE VIRTUAL TABLE " + FTS_TABLE_NAME + " using fts3" + "("
+    database.execSQL("CREATE VIRTUAL TABLE " + FTS_TABLE_NAME + " using fts4" + "(tokenize=unicode61, "
     +COLUMN_ST_NO + "," + COLUMN_ST_TEXT + "," + COLUMN_TABLE_NAME + ");");
 
-    Cursor cursor = database
+    SQLiteCursor cursor = (SQLiteCursor) database
         .rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name like '%stih%';", null);
 
     database.beginTransaction();
@@ -96,7 +96,7 @@ public class DatabaseAccess {
 
   public List<SearchResult> runSearch(String query) {
     List<SearchResult> searchList = new ArrayList<>();
-    Cursor cursor = database.rawQuery("SELECT * FROM " + FTS_TABLE_NAME + " WHERE " + COLUMN_ST_TEXT
+    SQLiteCursor cursor = (SQLiteCursor) database.rawQuery("SELECT * FROM " + FTS_TABLE_NAME + " WHERE " + COLUMN_ST_TEXT
     + " MATCH " + "'" + query + "' " + SEARCH_LIMIT, null);
     cursor.moveToFirst();
     while (!cursor.isAfterLast()) {
@@ -115,7 +115,7 @@ public class DatabaseAccess {
 
   public List<String> getPoemPartText(String table) {
     List<String> list = new ArrayList<>();
-    Cursor cursor = database.rawQuery("SELECT " + COLUMN_ST_TEXT + " FROM stih_" + table, null);
+    SQLiteCursor cursor = (SQLiteCursor) database.rawQuery("SELECT " + COLUMN_ST_TEXT + " FROM stih_" + table, null);
     cursor.moveToFirst();
     while (!cursor.isAfterLast()) {
       list.add(cursor.getString(cursor.getColumnIndex(COLUMN_ST_TEXT)));
@@ -127,7 +127,7 @@ public class DatabaseAccess {
 
   public List<String> getIntersAuthors(String table, String stNo) {
     List<String> list = new ArrayList<>();
-    Cursor cursor = database.rawQuery("SELECT " + COLUMN_T_NAME + " FROM tolk_" + table
+    SQLiteCursor cursor = (SQLiteCursor) database.rawQuery("SELECT " + COLUMN_T_NAME + " FROM tolk_" + table
         + " WHERE " + COLUMN_ST_NO + "=" + stNo, null);
     cursor.moveToFirst();
     while (!cursor.isAfterLast()) {
@@ -140,7 +140,7 @@ public class DatabaseAccess {
 
   public List<Inter> getIntersComments(String table, String stNo) {
     List<Inter> list = new ArrayList<>();
-    Cursor cursor = database.rawQuery("SELECT " + COLUMN_T_NAME + ", " + COLUMN_COMMENTS + " FROM tolk_" + table
+    SQLiteCursor cursor = (SQLiteCursor) database.rawQuery("SELECT " + COLUMN_T_NAME + ", " + COLUMN_COMMENTS + " FROM tolk_" + table
         + " WHERE " + COLUMN_ST_NO + "=" + stNo, null);
     cursor.moveToFirst();
     while (!cursor.isAfterLast()) {

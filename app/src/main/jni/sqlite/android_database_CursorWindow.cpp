@@ -391,7 +391,7 @@ int register_android_database_CursorWindow(JNIEnv* env)
     GET_FIELD_ID(gCharArrayBufferClassInfo.sizeCopied, clazz, "sizeCopied", "I");
 
     return jniRegisterNativeMethods(env,
-    "io/requery/android/database/CursorWindow", sMethods, NELEM(sMethods));
+    "ru/ekzeget/ekzeget/database/CursorWindow", sMethods, NELEM(sMethods));
 }
 
 } // namespace android

@@ -17,10 +17,7 @@
 package ru.ekzeget.ekzeget.database;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteException;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.io.File;
@@ -31,6 +28,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.zip.ZipInputStream;
+import ru.ekzeget.ekzeget.database.sqlite.SQLiteDatabase;
+import ru.ekzeget.ekzeget.database.sqlite.SQLiteOpenHelper;
 
 /**
  * A helper class to manage database creation and version management using
@@ -61,7 +60,7 @@ public class SQLiteAssetHelper extends SQLiteOpenHelper {
 
   private final Context mContext;
   private final String mName;
-  private final CursorFactory mFactory;
+  private final SQLiteDatabase.CursorFactory mFactory;
   private final int mNewVersion;
 
   private SQLiteDatabase mDatabase = null;
@@ -91,7 +90,7 @@ public class SQLiteAssetHelper extends SQLiteOpenHelper {
    *     SQL file(s) contained within the application assets folder will be used to
    *     upgrade the database
    */
-  public SQLiteAssetHelper(Context context, String name, String storageDirectory, CursorFactory factory, int version) {
+  public SQLiteAssetHelper(Context context, String name, String storageDirectory, SQLiteDatabase.CursorFactory factory, int version) {
     super(context, name, factory, version);
 
     if (version < 1) throw new IllegalArgumentException("Version must be >= 1, was " + version);
@@ -125,7 +124,7 @@ public class SQLiteAssetHelper extends SQLiteOpenHelper {
    *     SQL file(s) contained within the application assets folder will be used to
    *     upgrade the database
    */
-  public SQLiteAssetHelper(Context context, String name, CursorFactory factory, int version) {
+  public SQLiteAssetHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
     this(context, name, null, factory, version);
   }
 

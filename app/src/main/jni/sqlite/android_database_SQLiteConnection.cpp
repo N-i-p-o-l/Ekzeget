@@ -852,7 +852,7 @@ static JNINativeMethod sMethods[] =
             (void*)nativeOpen },
     { "nativeClose", "(J)V",
             (void*)nativeClose },
-    { "nativeRegisterCustomFunction", "(JLio/requery/android/database/sqlite/SQLiteCustomFunction;)V",
+    { "nativeRegisterCustomFunction", "(JLru/ekzeget/ekzeget/database/sqlite/SQLiteCustomFunction;)V",
             (void*)nativeRegisterCustomFunction },
     { "nativeRegisterLocalizedCollators", "(JLjava/lang/String;)V",
             (void*)nativeRegisterLocalizedCollators },
@@ -909,7 +909,7 @@ static JNINativeMethod sMethods[] =
 int register_android_database_SQLiteConnection(JNIEnv *env)
 {
     jclass clazz;
-    FIND_CLASS(clazz, "io/requery/android/database/sqlite/SQLiteCustomFunction");
+    FIND_CLASS(clazz, "ru/ekzeget/ekzeget/database/sqlite/SQLiteCustomFunction");
 
     GET_FIELD_ID(gSQLiteCustomFunctionClassInfo.name, clazz,
             "name", "Ljava/lang/String;");
@@ -922,7 +922,7 @@ int register_android_database_SQLiteConnection(JNIEnv *env)
     gStringClassInfo.clazz = jclass(env->NewGlobalRef(clazz));
 
     return jniRegisterNativeMethods(env, 
-        "io/requery/android/database/sqlite/SQLiteConnection",
+        "ru/ekzeget/ekzeget/database/sqlite/SQLiteConnection",
         sMethods, NELEM(sMethods)
     );
 }
